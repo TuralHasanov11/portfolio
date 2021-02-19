@@ -2058,9 +2058,9 @@ button.btn-danger:hover {
 }
 
 input[type="button"],
-button[type="submit"],
+button[type="submit"]:not(.logout),
 input[type="reset"],
-button,
+button:not(.logout),
 .button {
     position: relative;
     display: inline-block;
@@ -2102,17 +2102,17 @@ button,
 }
 
 input[type="button"]:hover,
-button[type="submit"]:hover,
+button[type="submit"]:not(.logout):hover,
 input[type="reset"]:hover,
-button:hover,
+button:not(.logout):hover,
 .button:hover {
     background-color: #9ececc;
 }
 
 input[type="button"]:active,
-button[type="submit"]:active,
+button[type="submit"]:not(.logout):active,
 input[type="reset"]:active,
-button:active,
+button:not(.logout):active,
 .button:active {
     background-color: #7eaeac;
 }
@@ -2269,7 +2269,8 @@ button:active,
     padding-left: 0;
 }
 
-#nav ul li a {
+#nav ul li a,
+#nav ul li button {
     display: block;
     padding: 0.5em 1.5em 0.5em 1.5em;
     color: rgba(255, 255, 255, 0.5);
@@ -2283,12 +2284,14 @@ button:active,
     font-size: 0.8em;
 }
 
-#nav ul li a i {
+#nav ul li a i,
+#nav ul li button i {
     position: relative;
     display: block;
 }
 
-#nav ul li a i:before {
+#nav ul li a i:before,
+#nav ul li button i:before {
     position: absolute;
     left: 0;
     color: #41484c;

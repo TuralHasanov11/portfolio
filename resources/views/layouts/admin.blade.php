@@ -22,7 +22,7 @@
 				<div class="top">
 
 						<div id="logo">
-							<span class="image avatar48"><img style="border-radius: 50%" src="{{asset('images/core-images/profile.png')}}" alt="" /></span>
+							<span class="image avatar48"><img style="border-radius: 50%" src="{{asset('images/core-images/profile.PNG')}}" alt="" /></span>
 							<h1 id="title">{{ config('app.profile.name') }}</h1>
 							<p>{{ config('app.profile.job') }}</p>
 						</div>
@@ -33,11 +33,15 @@
 								<li><a href="{{route('admin.sites.index')}}" class="@if (request()->routeIs('admin.sites.index') || request()->routeIs('admin.sites.show'))
                                     active
                                 @endif"><i class="fa fa-superpowers" aria-hidden="true"></i>Sites</a></li>
-								<li><x-dropdown-link :href="route('logout')"
-									onclick="event.preventDefault();
-												this.closest('form').submit();">
-										{{ __('Log out') }}
-									</x-dropdown-link></li>
+								<li>
+									<form method="POST" action="{{ route('logout') }}">
+										@csrf
+			
+										<button class="logout" type="submit">
+											 {{ __('Log out') }}
+										</button>
+									</form>
+								</li>
 							</ul>
 						</nav>
 
