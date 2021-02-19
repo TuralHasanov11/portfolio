@@ -22,7 +22,7 @@
 				<div class="top">
 
 						<div id="logo">
-							<span class="image avatar48"><img style="border-radius: 50%" src="{{asset('images/core-images/profile.png')}}" alt="" /></span>
+							<span class="image avatar48"><img style="border-radius: 50%" src="{{asset('images/core-images/profile.PNG')}}" alt="" /></span>
 							<h1 id="title">{{ config('app.profile.name') }}</h1>
 							<p>{{ config('app.profile.job') }}</p>
 						</div>
