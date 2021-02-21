@@ -2814,7 +2814,7 @@ button:not(.logout):active,
 
 @media screen and (max-width: 576px) {
     .skill .image img {
-        max-height: 8.25em !important;
-        min-height: 8.25em !important;
+        max-height: 8.5em !important;
+        min-height: 8.5em !important;
     }
 }
