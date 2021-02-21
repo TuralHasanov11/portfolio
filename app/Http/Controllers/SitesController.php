@@ -26,7 +26,7 @@ class SitesController extends Controller
             ]);
         
         if($request->has('image')){
-            $fileName=Str::slug($data['name']).'_'.time().'.'.$data['image']->extension();
+            $fileName=$data['name'].'.'.$data['image']->extension();
             $fileDirectory = 'images/sites/'.$fileName;
             $request->image->move(public_path('images/sites'),$fileName);
         }
@@ -56,7 +56,7 @@ class SitesController extends Controller
         ]);
     
         if($request->has('image')){
-            $fileName=Str::slug($data['name']).'_'.time().'.'.$data['image']->extension();
+            $fileName=$data['name'].'.'.$data['image']->extension();
             $fileDirectory = 'images/sites/'.$fileName;
             $request->image->move(public_path('images/sites'),$fileName);
             if(file_exists(public_path($site->image))){
