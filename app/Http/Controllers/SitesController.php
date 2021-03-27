@@ -28,7 +28,7 @@ class SitesController extends Controller
         if($request->has('image')){
             $fileName=$data['name'].'.'.$data['image']->extension();
             $fileDirectory = 'images/sites/'.$fileName;
-            $request->image->move(public_path('images/sites'),$fileName);
+            // $request->image->move(public_path('images/sites'),$fileName);
         }
 
         Site::create([
@@ -58,10 +58,11 @@ class SitesController extends Controller
         if($request->has('image')){
             $fileName=$data['name'].'.'.$data['image']->extension();
             $fileDirectory = 'images/sites/'.$fileName;
-            // $request->image->move(public_path('images/sites'),$fileName);
+            
             // if(file_exists(public_path($site->image))){
             //     unlink(public_path($site->image));
             // }
+            // $request->image->move(public_path('images/sites'),$fileName);
         }
 
         $site->update([

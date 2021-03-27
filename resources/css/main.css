@@ -2818,3 +2818,7 @@ button:not(.logout):active,
         min-height: 8.5em !important;
     }
 }
+
+table {
+    vertical-align: middle !important;
+}

@@ -58,7 +58,7 @@
             <h2>Projects</h2>
         </header>
 
-        <p>Real and demo projects (websites), I have made till now</p>
+        <p>Real and demo projects (websites)</p>
 
         <div class="row">
             @foreach ($sites as $key => $site)

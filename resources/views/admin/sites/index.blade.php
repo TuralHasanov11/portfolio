@@ -69,10 +69,11 @@
                 </thead>
                 <tbody>
                     @foreach ($sites as $site)
-                    <tr>
+                    <tr class="align-middle">
                     <th scope="row">{{$site->id}}</th>
                     <td>{{$site->name}}</td>
                     <td><a href="{{$site->url}}">{{$site->url}}</a></td>
+                    <td><img src="{{asset($site->image)}}" alt="{{$site->image}}" width="50" height="50"></td>
                     <td><a href="{{route('admin.sites.show',['site'=>$site])}}">Edit</a></td>
                     </tr>
                     @endforeach
