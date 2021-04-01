@@ -59,10 +59,12 @@ class SitesController extends Controller
             $fileName=$data['name'].'.'.$data['image']->extension();
             $fileDirectory = 'images/sites/'.$fileName;
             
-            // if(file_exists(public_path($site->image))){
-            //     unlink(public_path($site->image));
-            // }
+            if(file_exists(public_path($site->image))){
+                unlink(public_path($site->image));
+            }
             // $request->image->move(public_path('images/sites'),$fileName);
+        }else{
+            $fileDirectory = $site->image;
         }
 
         $site->update([
