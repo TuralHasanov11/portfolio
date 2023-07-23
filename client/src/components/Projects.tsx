@@ -3,9 +3,12 @@ import { motion } from "framer-motion";
 import { styles } from "../assets/styles";
 import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
-import { projects } from "../data";
 import { fadeIn, textVariant } from "../utils/motion";
 import { Project } from "../models/global.model";
+import { useState, useEffect } from "react";
+import backendClient from "../clients";
+import { imageUrl } from "../utils/image_url";
+import getColorClassByNumber from "../utils/colors";
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
 
@@ -21,7 +24,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       >
         <div className="relative w-full h-[230px]">
           <img
-            src={project.image}
+            src={imageUrl(project.image).url()}
             alt="project_image"
             className="w-full h-full object-cover rounded-2xl"
           />
@@ -31,9 +34,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               className="w-16 h-16 flex justify-center items-center flex-col cursor-pointer gap-2"
             >
               <span
-                className={`bg-${project.is_production?"green":"blue"}-100 text-${project.is_production?"green":"blue"}-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-${project.is_production?"green":"blue"}-900 dark:text-${project.is_production?"green":"blue"}-300`}
+                className={`bg-${project.in_production?"green":"blue"}-100 text-${project.in_production?"green":"blue"}-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-${project.in_production?"green":"blue"}-900 dark:text-${project.in_production?"green":"blue"}-300`}
               >
-                {project.is_production?"Production":"Demo"}
+                {project.in_production?"Production":"Demo"}
               </span>
               <img
                 src={github}
@@ -55,12 +58,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
+          {project.tags.map((tag, index) => (
             <p
-              key={`${project.name}-${tag.name}`}
-              className={`text-[14px] ${tag.color}`}
+              key={`${project.name}-tag-${index}`}
+              className={`text-[14px] ${getColorClassByNumber(index)}`}
             >
-              #{tag.name}
+              #{tag}
             </p>
           ))}
         </div>
@@ -70,11 +73,35 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 function Projects() {
+
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    backendClient
+      .fetch(
+        `*[_type == "projects"]{
+            name,
+            description,
+            tags,
+            source_code_link,
+            in_production,
+            image{
+              asset->{
+                _id,
+                url
+              }
+            } 
+        }`
+      )
+      .then((data) => setProjects(data))
+      .catch(console.error);
+  }, []);
+
   return (
     <>
       <motion.div variants={textVariant()}>
         <p className={`${styles.sectionSubText} `}>My Projects</p>
-        <h2 className={`${styles.sectionHeadText}`}>Production Projects</h2>
+        <h2 className={`${styles.sectionHeadText}`}>Projects</h2>
       </motion.div>
 
       <div className="w-full flex">

@@ -1,4 +1,4 @@
-import React from "react";
+import {useState, useEffect} from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -7,23 +7,25 @@ import { motion } from "framer-motion";
 import "react-vertical-timeline-component/style.min.css";
 
 import { styles } from "../assets/styles";
-import { experiences } from "../data";
 import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 import { Experience } from "../models/global.model";
+import backendClient from "../clients";
+import { imageUrl } from "../utils/image_url";
+import dateMonthYearFormatter from "../utils/date_formatter";
 
 function ExperienceCard({ experience }: { experience: Experience }) {
   return (
     <VerticalTimelineElement
       contentStyle={{ background: "#1d1836", color: "#fff" }}
       contentArrowStyle={{ borderRight: "7px solid #232631" }}
-      date={experience.date}
-      iconStyle={{ background: experience.iconBg }}
+      date={`${dateMonthYearFormatter(experience.from_date)} - ${dateMonthYearFormatter(experience.to_date)}`}
+      iconStyle={{ background: "#E6DEDD" }}
       icon={
         <div className="flex justify-center items-center w-full h-full">
           <img
-            src={experience.icon}
-            alt={experience.company_name}
+            src={imageUrl(experience.icon).url()}
+            alt={experience.company}
             className="w-[60%] h-[60%] object-contain"
           />
         </div>
@@ -32,22 +34,41 @@ function ExperienceCard({ experience }: { experience: Experience }) {
       <div>
         <h3 className="text-white text-[24px] font-bold">{experience.title}</h3>
         <p className="text-secondary text-[16px] font-semibold m-0">
-          {experience.company_name}
+          {experience.company}
         </p>
       </div>
-      <ul className="mt-5 list-disc ml-5 space-y-2">
-        {experience.points.map((point, index) => (
-          <li
-            key={index}
-            className="text-white-100 text-[14px] pl-1 tracking-wider"
-          >{point}</li>
-        ))}
-      </ul>
+      <p className="mt-5 ml-5 space-y-2 text-white-100 text-[14px] pl-1 tracking-wider">
+        {experience.description}
+      </p>
     </VerticalTimelineElement>
   );
 }
 
 function Experiences() {
+
+  const [experiences, setExperiences] = useState<Experience[]>([]);
+
+  useEffect(() => {
+    backendClient
+      .fetch(
+        `*[_type == "experiences"] | order(from_date){
+            title,
+            company,
+            from_date,
+            to_date,
+            description,
+            icon{
+              asset->{
+                _id,
+                url
+              }
+            } 
+        }`
+      )
+      .then((data) => setExperiences(data))
+      .catch(console.error);
+  }, []);
+
   return (
     <>
       <motion.div variants={textVariant()}>

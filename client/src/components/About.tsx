@@ -1,12 +1,13 @@
-import React from "react";
+import {useEffect, useState} from "react";
 import {Tilt} from "react-tilt";
 import { motion } from "framer-motion";
 
 import { styles } from "../assets/styles";
-import { services } from "../data";
 import { fadeIn } from "../utils/motion.js";
 import { Service } from "../models/global.model.js";
 import {SectionWrapper} from "../hoc"
+import backendClient from "../clients.js";
+import { imageUrl } from "../utils/image_url.js";
 
 function ServiceCard({ index, service }: { index: number; service: Service }) {
   return (
@@ -19,7 +20,7 @@ function ServiceCard({ index, service }: { index: number; service: Service }) {
           options={{ max: 45, scale: 1, speed: 450 }}
           className="bg-tertiary rounded-[10px] py-2 px-12 min-h-[280px] flex justify-evenly items-center flex-col"
         >
-          <img src={service.icon} alt={service.title} className="w-16 h-16 object-contain"/>
+          <img src={imageUrl(service.icon).url()} alt={service.title} className="w-16 h-16 object-contain"/>
           <h3 className="text-white text-[20px] font-bold text-center">{service.title}</h3>
         </div>
       </motion.div>
@@ -28,6 +29,26 @@ function ServiceCard({ index, service }: { index: number; service: Service }) {
 }
 
 function About() {
+
+  const [services, setServices] = useState<Service[]>([]);
+
+  useEffect(() => {
+    backendClient
+      .fetch(
+        `*[_type == "services"]{
+            title,
+            icon{
+              asset->{
+                _id,
+                url
+              }
+            } 
+        }`
+      )
+      .then((data) => setServices(data))
+      .catch(console.error);
+  }, []);
+
   return (
     <div>
       <motion.div>
