@@ -19,42 +19,42 @@ function Contact() {
         <div className="mt-12 flex flex-col gap-8">
           <div className="flex flex-row gap-3">
             <a
-              href=""
+              href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL_ADDRESS}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white font-medium"
+              className="text-xl text-white font-medium"
             >
-              <i className="fa-solid fa-envelope"></i> test@test.com
+              <i className="fa-solid fa-envelope mr-2"></i> {import.meta.env.VITE_CONTACT_EMAIL_ADDRESS}
             </a>
           </div>
           <div className="flex flex-col gap-3">
             <a
-              href=""
+              href={import.meta.env.VITE_LINKEDIN_ADDRESS}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white font-medium"
+              className="text-xl text-white font-medium"
             >
-              <i className="fa-brands fa-linkedin"></i> LinkedIn address
+              <i className="fa-brands fa-linkedin mr-2"></i> LinkedIn address
             </a>
           </div>
           <div className="flex flex-col gap-3">
             <a
-              href=""
+              href={import.meta.env.VITE_GITHUB_ADDRESS}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white font-medium"
+              className="text-xl text-white font-medium"
             >
-              <i className="fa-brands fa-github"></i> GitHub profile
+              <i className="fa-brands fa-github mr-2"></i> GitHub Profile
             </a>
           </div>
           <div className="flex flex-col gap-3">
             <a
-              href=""
+              href={import.meta.env.VITE_YOUTUBE_ADDRESS}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white font-medium"
+              className="text-xl text-white font-medium"
             >
-              <i className="fa-brands fa-youtube"></i> YouTube channel
+              <i className="fa-brands fa-youtube mr-2"></i> YouTube Channel
             </a>
           </div>
         </div>
