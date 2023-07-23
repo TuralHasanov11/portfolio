@@ -1,9 +1,11 @@
 const classes = [
   "blue-text-gradient",
   "green-text-gradient",
+  "yellow-text-gradient",
   "pink-text-gradient",
   "red-text-gradient",
-  "yellow-text-gradient",
+  "orange-text-gradient",
+  "violet-text-gradient"
 ];
 
 export default function getColorClassByNumber(index: number) {
