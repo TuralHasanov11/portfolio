@@ -1,4 +1,4 @@
-import React, {FC } from "react";
+import {FC } from "react";
 import { motion } from "framer-motion";
 import { styles } from "../assets/styles";
 import { staggerContainer } from "../utils/motion";

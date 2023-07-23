@@ -9,6 +9,7 @@ import {SectionWrapper} from "../hoc"
 import backendClient from "../clients.js";
 import { imageUrl } from "../utils/image_url.js";
 
+
 function ServiceCard({ index, service }: { index: number; service: Service }) {
   return (
     <Tilt className="xs:w-[250px] w-full">
@@ -17,6 +18,8 @@ function ServiceCard({ index, service }: { index: number; service: Service }) {
         className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card"
       >
         <div
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //@ts-ignore
           options={{ max: 45, scale: 1, speed: 450 }}
           className="bg-tertiary rounded-[10px] py-2 px-12 min-h-[280px] flex justify-evenly items-center flex-col"
         >

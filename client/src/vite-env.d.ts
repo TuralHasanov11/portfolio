@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+declare module 'maath/random/dist/maath-random.esm';
 
 interface ImportMetaEnv {
     readonly VITE_CONTACT_EMAIL_ADDRESS: string
