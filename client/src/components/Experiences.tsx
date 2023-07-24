@@ -13,6 +13,8 @@ import { Experience } from "../models/global.model";
 import backendClient from "../clients";
 import { imageUrl } from "../utils/image_url";
 import dateMonthYearFormatter from "../utils/date_formatter";
+import {toHTML} from '@portabletext/to-html'
+
 
 function ExperienceCard({ experience }: { experience: Experience }) {
   return (
@@ -37,9 +39,7 @@ function ExperienceCard({ experience }: { experience: Experience }) {
           {experience.company}
         </p>
       </div>
-      <p className="mt-5 ml-5 space-y-2 text-white-100 text-[14px] pl-1 tracking-wider">
-        {experience.description}
-      </p>
+      <p dangerouslySetInnerHTML={{__html:toHTML(experience.description)}} className="experience-description mt-5 ml-5 space-y-2 text-white-100 text-[14px] pl-2 tracking-wider" />
     </VerticalTimelineElement>
   );
 }
