@@ -12,6 +12,10 @@ import getColorClassByNumber from "../utils/colors";
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
 
+  function projectModeColor(project: Project): string{
+    return project.in_production?"green":"blue"
+  }
+
   return (
     <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
       <Tilt
@@ -34,7 +38,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               className="w-16 h-16 flex justify-center items-center flex-col cursor-pointer gap-2"
             >
               <span
-                className={`bg-${project.in_production?"green":"blue"}-100 text-${project.in_production?"green":"blue"}-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-${project.in_production?"green":"blue"}-900 dark:text-${project.in_production?"green":"blue"}-300`}
+                className={`bg-${projectModeColor(project)}-100 text-${projectModeColor(project)}-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-${projectModeColor(project)}-900 dark:text-${projectModeColor(project)}-300`}
               >
                 {project.in_production?"Production":"Demo"}
               </span>

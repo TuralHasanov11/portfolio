@@ -51,7 +51,7 @@ function Experiences() {
   useEffect(() => {
     backendClient
       .fetch(
-        `*[_type == "experiences"] | order(from_date){
+        `*[_type == "experiences"] | order(from_date desc){
             title,
             company,
             from_date,
