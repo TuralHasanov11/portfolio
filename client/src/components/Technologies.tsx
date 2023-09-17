@@ -12,7 +12,7 @@ function Technologies() {
   useEffect(() => {
     backendClient
       .fetch(
-        `*[_type == "technologies"]{
+        `*[_type == "technologies"] | order(name asc){
             name,
             icon{
               asset->{
